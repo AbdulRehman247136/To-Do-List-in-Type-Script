@@ -45,7 +45,7 @@ export const createTask = async (req: AuthRequest, res: Response) => {
       const taskId = req.params.id;
       const task = await ToDoTasks.findOneAndDelete({ _id: taskId, UserId: req.user.id });
       if (!task) {
-        return res.status(404).json({ message: "Task not found" });
+        return res.status(404).json({ message: "Task not found " });
       }
       res.status(200).json({ message: "Task deleted successfully" });
     }

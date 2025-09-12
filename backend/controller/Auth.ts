@@ -124,7 +124,7 @@ export const signup =  async(req: Request, res: Response) => {
         )
       
         ;
-        console.log("User logged in successfully",token);
+
           
 
           res.status(201).json({
