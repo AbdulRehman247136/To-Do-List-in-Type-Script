@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 function ToDo() {
   const [taskInput, setTaskInput] = useState(""); // for new task
@@ -95,7 +97,9 @@ function ToDo() {
           className="border w-full h-10 rounded-2xl p-7 text-black"
         />
         <button
-          onClick={addTask}
+          onClick={()=>{addTask();
+          toast.success("Task added successfully!");
+          }}
           className="ml-4 px-7 h-10 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 bg-blue-500 text-white rounded-xl"
         >
           Submit
@@ -120,13 +124,17 @@ function ToDo() {
                     className="border rounded-xl px-2 py-1 flex-1"
                   />
                   <button
-                    onClick={updateTask}
+                    onClick={()=>{updateTask();
+                    toast.success("Task updated successfully!");
+                    }}
                     className="px-4 py-2 bg-green-500 text-white rounded-xl"
                   >
                     Update
                   </button>
                   <button
-                    onClick={() => setEditingTaskId(null)}
+                    onClick={() =>{ setEditingTaskId(null)
+                      toast.info("Edit cancelled.");
+                    }}
                     className="px-4 py-2 bg-gray-500 text-white rounded-xl"
                   >
                     Cancel
@@ -140,15 +148,20 @@ function ToDo() {
                       onClick={() => {
                         setEditingTaskId(task.id);
                         setEditText(task.text);
+                        toast.info("You can now edit the task.");
                       }}
                       className="px-4 py-2 bg-yellow-500 text-white rounded-2xl"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => deleteTask(task.id)}
+                      onClick={() => {
+                        deleteTask(task.id)
+                        toast.success("Task deleted successfully!");
+                      }}
                       className="px-4 py-2 bg-red-500 text-white rounded-xl"
-                    >
+                     
+                    > 
                       Delete
                     </button>
                   </div>
@@ -158,6 +171,7 @@ function ToDo() {
           ))}
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 }

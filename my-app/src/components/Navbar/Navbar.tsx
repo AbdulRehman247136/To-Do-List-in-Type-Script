@@ -3,6 +3,8 @@ import React from "react";
 import type { RootState } from "../../State/store/Store";
 import { cleartoken } from "../../State/tokenslice/TokenSlice";
 import { useNavigate } from "react-router-dom";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Navbar: React.FC = () => {
@@ -28,7 +30,9 @@ const Navbar: React.FC = () => {
   const clearToken = async () => {
     dispatch(cleartoken()); // clear from redux
     await cookiesremover(); // clear from backend
-    navigate("/login"); // redirect to login
+    navigate("/login"); 
+    toast.success("Logged out successfully");
+    // redirect to login
   };
 
   return (
@@ -54,6 +58,7 @@ const Navbar: React.FC = () => {
       >
         {Token ? "Logout" : "Login"}
       </div>
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </nav>
   );
 };
