@@ -1,9 +1,9 @@
 // tokenSlice.ts
-export const tokenholder = (token: string) => {
+export const tokenholder = (token: string, name:string) => {
     return {
-      type: "SET_TOKEN",
-      payload: token,
-    } as const;
+      type: "SET_TOKEN" as const,
+      payload: {token, name},
+    } 
   };
   
   export const cleartoken = () => {
@@ -15,10 +15,12 @@ export const tokenholder = (token: string) => {
   // State type
   interface AuthState {
     "access-token": string;
+    name: string;
   }
   
   const initialState: AuthState = {
     "access-token": "",
+    name:""
   };
   
   // Action types
@@ -30,12 +32,14 @@ export const tokenholder = (token: string) => {
       case "SET_TOKEN":
         return {
           ...state,
-          "access-token": action.payload ?? "",
+          "access-token": action.payload.token ?? "",
+          name: action.payload.name ?? "",
         };
       case "CLEAR_TOKEN":
         return {
           ...state,
           "access-token": "",
+          name: "",
         };
       default:
         return state;

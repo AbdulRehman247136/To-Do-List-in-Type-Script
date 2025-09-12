@@ -60,7 +60,7 @@ function Signup () {
 
 
         if (response.data.token) {
-          dispatch(tokenholder(response.data.token));      
+          dispatch(tokenholder(response.data.token,response.data.user.name));      
             toast.success("Signup successful!");
             navigate("/");
         }

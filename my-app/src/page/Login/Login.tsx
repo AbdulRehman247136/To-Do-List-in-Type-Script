@@ -38,7 +38,8 @@ const Login = () => {
             });
 
             if (response.data.token) {
-              dispatch(tokenholder(response.data.token)); 
+              dispatch(tokenholder(response.data.token,response.data.user.name)); 
+          
                 toast.success("Login successful!");
                 navigate("/");
 

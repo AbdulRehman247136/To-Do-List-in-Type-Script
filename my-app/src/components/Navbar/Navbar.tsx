@@ -10,6 +10,8 @@ import axios from "axios";
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const Token = useSelector((state: RootState) => state.auth["access-token"]);
+  const name = useSelector((state: RootState) => state.auth.name);
+
   const dispatch = useDispatch();
 
   // Function to remove cookies from backend
@@ -39,7 +41,9 @@ const Navbar: React.FC = () => {
     <nav className="w-screen h-20 flex items-center px-8 text-white 
       bg-gradient-to-r from-indigo-900 via-purple-800 to-black shadow-md"
     >
-      <div className="flex-1 text-left text-2xl"></div>
+      <div className="flex-1 text-left text-2xl">
+        {Token ? `Welcome, ${name}` : "Welcome, Guest"}
+      </div>
       <div className="flex-1 text-center text-2xl">
         <ul>
           <li>TO-DO-LIST</li>
