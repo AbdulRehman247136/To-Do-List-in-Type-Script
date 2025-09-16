@@ -8,7 +8,7 @@ router.post('/Tasks',authMiddleware, createTask);
 router.get('/Tasks',authMiddleware,gettasks);
 router.delete('/Tasks/:id',authMiddleware,deletetask);
 router.put('/UpdateTasks/:id',authMiddleware,updatetask);
-router.put("/Tasks/toggle/:id", toggleTask);
+router.put("/Tasks/toggle/:id",authMiddleware, toggleTask);
 
 
 export default router;

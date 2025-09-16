@@ -173,13 +173,13 @@ function ToDo() {
               ) : (
                 <>
                    <span
-    onClick={() => toggleTask(task.id)} 
-    className={`break-words max-w-[60%] text-left ${
-      task.completed ? "line-through text-gray-400" : ""
-    }`}
-  >
-    {task.text}
-  </span>
+                   onClick={() => toggleTask(task.id)} 
+                    className={`break-words max-w-[60%] cursor-pointer text-left, ${
+                     task.completed ? "line-through text-gray-400" : ""
+                       }`}
+                                  >
+                                     {task.text}
+                                                        </span>
                   <div className="flex gap-2">
                     <button
                       onClick={() => {
