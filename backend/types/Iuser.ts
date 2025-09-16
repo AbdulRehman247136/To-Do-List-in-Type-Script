@@ -13,6 +13,7 @@ export interface ITasks extends Document {
     _id:string;
     text:string;
     UserId:Types.ObjectId;
+    completed:boolean;
    
 
 }

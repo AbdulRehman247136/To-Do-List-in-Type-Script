@@ -83,3 +83,25 @@ export const createTask = async (req: AuthRequest, res: Response) => {
       res.status(500).json({ message: "Server Error" });
     }
   }
+
+
+  // Toggle task completion
+
+
+  export const toggleTask = async (req: AuthRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+      const task = await ToDoTasks.findById(id);
+  
+      if (!task) return res.status(404).json({ message: "Task not found" });
+  
+      task.completed = !task.completed; // flip value
+      await task.save();
+  
+      res.json(task);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  };
+  

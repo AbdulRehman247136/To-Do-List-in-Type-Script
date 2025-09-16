@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -98,8 +98,12 @@ const Login = () => {
         <p className="register-link">
           
         </p>
+        <div className="pt-7 text-xl">
+        To Register Please click Here <Link to = "/signup" className="text-black underline text-2xl">SignUp</Link>
+      </div>
       </div>
       <ToastContainer/>
+     
     </div>
     
   );

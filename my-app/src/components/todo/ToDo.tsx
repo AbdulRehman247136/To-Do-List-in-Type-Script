@@ -6,16 +6,18 @@ type Task = {
   _id: string;
   text: string;
   UserId: string;
+  completed: boolean;
 };
 
 type CreateTaskResponse = {
   message: string;
   task: Task;
+  completed: boolean;
   
 };
 function ToDo() {
   const [taskInput, setTaskInput] = useState(""); // for new task
-  const [newtasks, setNewTasks] = useState<{ id: string; text: string }[]>([]);
+  const [newtasks, setNewTasks] = useState<{ id: string; text: string,completed:boolean }[]>([]);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null); // currently editing
   const [editText, setEditText] = useState(""); // text in the edit box
 
@@ -28,7 +30,7 @@ function ToDo() {
         `${import.meta.env.VITE_API_URL}/api/Tasks`,
         { withCredentials: true }
       );
-      setNewTasks(response.data.tasks.map((task) => ({ id: task._id, text: task.text }))
+      setNewTasks(response.data.tasks.map((task) => ({ id: task._id, text: task.text,completed:task.completed }))
     .reverse());
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -91,6 +93,28 @@ function ToDo() {
     }
   };
 
+
+
+  const toggleTask = async (id: string) => {
+    try {
+      const response = await axios.put<Task>(
+        `${import.meta.env.VITE_API_URL}/api/Tasks/toggle/${id}`,
+        {},
+        { withCredentials: true }
+      );
+  
+      // Update UI
+      setNewTasks((prev) =>
+        prev.map((task) =>
+          task.id === id ? { ...task, completed: response.data.completed } : task
+        )
+      );
+    } catch (error) {
+      console.error("Error toggling task:", error);
+    }
+  };
+  
+
   return (
     <div className="w-screen h-screen border rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6">
       {/* Input for new task */}
@@ -148,7 +172,14 @@ function ToDo() {
                 </>
               ) : (
                 <>
-                  <span className="break-words max-w-[60%] text-left">{task.text}</span>
+                   <span
+    onClick={() => toggleTask(task.id)} 
+    className={`break-words max-w-[60%] text-left ${
+      task.completed ? "line-through text-gray-400" : ""
+    }`}
+  >
+    {task.text}
+  </span>
                   <div className="flex gap-2">
                     <button
                       onClick={() => {

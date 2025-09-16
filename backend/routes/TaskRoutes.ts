@@ -1,4 +1,4 @@
-import { createTask,gettasks,deletetask,updatetask } from "../controller/Tasks";
+import { createTask,gettasks,deletetask,updatetask,toggleTask } from "../controller/Tasks";
 
 import { Router,Request,Response } from "express";
 import { authMiddleware } from "../middleware/AuthMiddleWare";
@@ -8,5 +8,7 @@ router.post('/Tasks',authMiddleware, createTask);
 router.get('/Tasks',authMiddleware,gettasks);
 router.delete('/Tasks/:id',authMiddleware,deletetask);
 router.put('/UpdateTasks/:id',authMiddleware,updatetask);
+router.put("/Tasks/toggle/:id", toggleTask);
+
 
 export default router;
