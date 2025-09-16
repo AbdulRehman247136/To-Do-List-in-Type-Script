@@ -8,7 +8,9 @@ import { tokenholder } from "../../State/tokenslice/TokenSlice"
 import { useNavigate } from "react-router-dom";
 
 
+
 function Signup () {
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
     interface formData  {
@@ -51,7 +53,7 @@ function Signup () {
   
       try {
         const response = await axios.post<SignupResponse>(
-          "http://localhost:5000/api/auth/signup",
+          `${import.meta.env.VITE_API_URL}/api/auth/signup`,
           formData,
           {withCredentials: true}
         );

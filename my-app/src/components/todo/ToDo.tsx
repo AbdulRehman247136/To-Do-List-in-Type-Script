@@ -2,32 +2,34 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+type Task = {
+  _id: string;
+  text: string;
+  UserId: string;
+};
 
+type CreateTaskResponse = {
+  message: string;
+  task: Task;
+  
+};
 function ToDo() {
   const [taskInput, setTaskInput] = useState(""); // for new task
   const [newtasks, setNewTasks] = useState<{ id: string; text: string }[]>([]);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null); // currently editing
   const [editText, setEditText] = useState(""); // text in the edit box
 
-  type Task = {
-    _id: string;
-    text: string;
-    UserId: string;
-  };
-
-  type CreateTaskResponse = {
-    message: string;
-    task: Task;
-  };
+  
 
   // Fetch tasks from backend
   const fetchTasks = async () => {
     try {
       const response = await axios.get<{ tasks: Task[] }>(
-        "http://localhost:5000/api/Tasks",
+        `${import.meta.env.VITE_API_URL}/api/Tasks`,
         { withCredentials: true }
       );
-      setNewTasks(response.data.tasks.map((task) => ({ id: task._id, text: task.text })));
+      setNewTasks(response.data.tasks.map((task) => ({ id: task._id, text: task.text }))
+    .reverse());
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
@@ -41,11 +43,15 @@ function ToDo() {
   const addTask = async () => {
     if (taskInput.trim() === "") return;
     try {
-      await axios.post<CreateTaskResponse>(
-        "http://localhost:5000/api/Tasks",
+    await axios.post<CreateTaskResponse>(
+        `${import.meta.env.VITE_API_URL}/api/Tasks`,
         { text: taskInput },
         { withCredentials: true }
       );
+      
+      
+  
+   
       setTaskInput("");
       fetchTasks();
     } catch (error) {
@@ -56,7 +62,7 @@ function ToDo() {
   // Delete task
   const deleteTask = async (id: string) => {
     try{
-      await axios.delete(`http://localhost:5000/api/Tasks/${id}`, { withCredentials: true });
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/Tasks/${id}`, { withCredentials: true });
     setNewTasks(newtasks.filter((task) => task.id !== id));}
     catch(error){
       console.error("Error deleting task:", error);
@@ -69,7 +75,7 @@ function ToDo() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/UpdateTasks/${editingTaskId}`,
+        `${import.meta.env.VITE_API_URL}/api/UpdateTasks/${editingTaskId}`,
         { text: editText },
         { withCredentials: true }
       );
