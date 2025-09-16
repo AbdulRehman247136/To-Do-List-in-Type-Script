@@ -13,15 +13,21 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Protected route: only accessible with token */}
+        
         <Route
           path="/"
           element={token ? <MainPage /> : <Navigate to="/login" />}
         />
 
-        {/* Public routes */}
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+        {/* Public routes (redirect to / if already logged in) */}
+        <Route
+          path="/signup"
+          element={!token ? <SignUp /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!token ? <Login /> : <Navigate to="/" />}
+        />
       </Routes>
     </Router>
   )
