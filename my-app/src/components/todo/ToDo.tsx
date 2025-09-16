@@ -94,7 +94,7 @@ function ToDo() {
   return (
     <div className="w-screen h-screen border rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6">
       {/* Input for new task */}
-      <div className="w-[500px] h-auto rounded-2xl flex justify-center items-center shadow-xl p-6 bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600 mt-10 mx-auto">
+      <div className="w-full max-w-md h-auto rounded-2xl flex justify-center items-center shadow-xl p-6 bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600 mt-10 mx-auto">
         <input
           type="text"
           placeholder="Add your new todo"
@@ -113,7 +113,7 @@ function ToDo() {
       </div>
 
       {/* Task list */}
-      <div className="w-[700px] h-[400px] rounded-2xl shadow-xl p-6 bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600 mt-10 mx-auto text-center overflow-y-auto">
+      <div className="w-full max-w-2xl h-[400px] rounded-2xl shadow-xl p-6 bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600 mt-10 mx-auto text-center overflow-y-auto">
         <ul>
           {newtasks.map((task) => (
             <li

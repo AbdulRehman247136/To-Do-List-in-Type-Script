@@ -57,7 +57,7 @@ export const signup =  async(req: Request, res: Response) => {
                 httpOnly: true,
                 secure:false,
                 sameSite:'lax',
-                maxAge: 24* 60 * 60 * 1000 // 1 day
+                maxAge:  60 * 60 * 1000 // 1 hour
             
             }
             )
