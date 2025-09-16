@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { tokenholder } from "../../State/tokenslice/TokenSlice";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
@@ -67,12 +67,12 @@ function Signup() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-cyan-200 to-blue-400">
-      <div className="bg-white rounded-xl shadow-md w-[350px] p-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Signup</h2>
+      <div className="bg-white rounded-xl shadow-md w-[350px] p-8 text-center text-black">
+        <h2 className="text-2xl font-bold mb-6">Signup</h2>
         <form onSubmit={handleSubmit}>
           {/* Name */}
           <div className="mb-4 text-left">
-            <label htmlFor="name" className="block font-semibold text-gray-700 mb-2">
+            <label htmlFor="name" className="block font-semibold mb-2">
               Full Name:
             </label>
             <input
@@ -84,13 +84,13 @@ function Signup() {
               onChange={handleChange}
               required
               minLength={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black"
             />
           </div>
 
           {/* Email */}
           <div className="mb-4 text-left">
-            <label htmlFor="email" className="block font-semibold text-gray-700 mb-2">
+            <label htmlFor="email" className="block font-semibold mb-2">
               Email:
             </label>
             <input
@@ -101,13 +101,13 @@ function Signup() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black"
             />
           </div>
 
           {/* Password */}
           <div className="mb-4 text-left">
-            <label htmlFor="password" className="block font-semibold text-gray-700 mb-2">
+            <label htmlFor="password" className="block font-semibold mb-2">
               Password:
             </label>
             <input
@@ -119,13 +119,13 @@ function Signup() {
               onChange={handleChange}
               required
               minLength={10}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black"
             />
           </div>
 
           {/* Phone Number */}
           <div className="mb-6 text-left">
-            <label htmlFor="phone" className="block font-semibold text-gray-700 mb-2">
+            <label htmlFor="phone" className="block font-semibold mb-2">
               Phone Number:
             </label>
             <input
@@ -138,7 +138,7 @@ function Signup() {
               required
               pattern="[0-9]{11}"
               title="Phone number must be 11 digits"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-black"
             />
           </div>
 
@@ -151,8 +151,14 @@ function Signup() {
           </button>
           <ToastContainer position="top-right" />
         </form>
-          <div className="text-black pt-7 text-xl">
-          <p>To Login Click Here <Link to = "/login" className="text-2xl text-blue-500 underline">Login</Link></p>
+
+        <div className="pt-7 text-xl">
+          <p>
+            To Login Click Here{" "}
+            <Link to="/login" className="text-2xl text-blue-500 underline">
+              Login
+            </Link>
+          </p>
         </div>
       </div>
     </div>
